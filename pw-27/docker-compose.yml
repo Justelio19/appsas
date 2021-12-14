@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+ pw-27-mysql:
+  container_name: pw-27-mysql
+  image: mysql:5.7
+  environment:
+   - MYSQL_ROOT_PASSWORD=root 
+   - MYSQL_DATABASE=pw-27
+   - MYSQL_PASSWORD=root
+  ports:
+   - "3306:3306"
+  expose:
+   - "3306"
+
+ pw-27-app:
+  container_name: pw-27-app
+  ports:
+   - "8080:8080"
+  build: ./
+  depends_on:
+   - pw-27-mysql
+  restart: on-failure
